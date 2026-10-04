@@ -43,7 +43,6 @@ fun CalendarScreen(context: android.content.Context) {
     }
 
     val entryByDate = entries.associateBy { it.date }
-        try {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
         Surface(modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large, color = Color(0xFF0284C7).copy(alpha = 0.12f), tonalElevation = 4.dp) {
             Row(modifier = Modifier.padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
