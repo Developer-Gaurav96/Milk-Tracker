@@ -21,11 +21,9 @@ jobs:
         cache: gradle
 
     - name: Install Gradle 8.2.2
-      run: |
-        curl -L --retry 3 --retry-delay 2 -o /tmp/gradle-8.2.2-bin.zip https://downloads.gradle.org/distributions/gradle-8.2.2-bin.zip
-        unzip -q /tmp/gradle-8.2.2-bin.zip -d /tmp/
-        echo "GRADLE_HOME=/tmp/gradle-8.2.2" >> $GITHUB_ENV
-        echo "/tmp/gradle-8.2.2/bin" >> $GITHUB_PATH
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.2.2'
 
     - name: Build with Gradle
       run: gradle build --no-daemon
