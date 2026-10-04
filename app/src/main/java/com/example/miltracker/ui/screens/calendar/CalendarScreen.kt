@@ -36,12 +36,13 @@ fun CalendarScreen(context: android.content.Context) {
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
 
     LaunchedEffect(currentMonth) {
-        val m = "${currentMonth.year}-${currentMonth.monthValue.toString().padStart(2, '0')}"
-        entries = dao.getEntriesByMonth(m)
+        try {
+            val m = "${currentMonth.year}-${currentMonth.monthValue.toString().padStart(2, '0')}"
+            entries = dao.getEntriesByMonth(m)
+        } catch (e: Exception) { entries = emptyList() }
     }
 
-    try {
-        val entryByDate = entries.associateBy { it.date }
+    val entryByDate = entries.associateBy { it.date }
         try {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
         Surface(modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large, color = Color(0xFF0284C7).copy(alpha = 0.12f), tonalElevation = 4.dp) {
