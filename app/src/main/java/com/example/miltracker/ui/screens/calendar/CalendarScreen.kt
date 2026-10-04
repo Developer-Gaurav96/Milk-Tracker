@@ -70,6 +70,8 @@ fun CalendarScreen(context: android.content.Context) {
                 }
             }
         }
+        }
+    }
     } catch (e: Exception) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text("Load error. Restart app.", color = MaterialTheme.colorScheme.error)
