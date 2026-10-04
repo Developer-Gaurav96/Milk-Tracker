@@ -23,7 +23,7 @@ jobs:
     - name: Install Gradle 8.2.2
       uses: gradle/actions/setup-gradle@v4
       with:
-        gradle-version: '8.2.2'
+        gradle-version: '8.5'
 
     - name: Build with Gradle
       run: gradle build --no-daemon
