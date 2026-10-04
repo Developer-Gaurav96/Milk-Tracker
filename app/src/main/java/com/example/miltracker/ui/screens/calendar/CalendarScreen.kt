@@ -40,9 +40,9 @@ fun CalendarScreen(context: android.content.Context) {
         entries = dao.getEntriesByMonth(m)
     }
 
-    val entryByDate = entries.associateBy { it.date }
-
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
+    try {
+        val entryByDate = entries.associateBy { it.date }
+        Column(modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
         Surface(modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large, color = Color(0xFF0284C7).copy(alpha = 0.12f), tonalElevation = 4.dp) {
             Row(modifier = Modifier.padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = { currentMonth = currentMonth.minusMonths(1) }) { Icon(Icons.Default.KeyboardArrowLeft, contentDescription = "Prev") }
@@ -68,6 +68,10 @@ fun CalendarScreen(context: android.content.Context) {
                     if (entry != null) Text("${entry.milk}L", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                 }
             }
+        }
+    } catch (e: Exception) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("Load error. Restart app.", color = MaterialTheme.colorScheme.error)
         }
     }
 }
