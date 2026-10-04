@@ -22,10 +22,10 @@ jobs:
 
     - name: Install Gradle 8.2.2
       run: |
-        curl -L -o gradle-8.2.2-bin.zip https://services.gradle.org/distributions/gradle-8.2.2-bin.zip
-        unzip -q gradle-8.2.2-bin.zip
-        echo "GRADLE_HOME=$PWD/gradle-8.2.2" >> $GITHUB_ENV
-        echo "$PWD/gradle-8.2.2/bin" >> $GITHUB_PATH
+        curl -L --retry 3 --retry-delay 2 -o /tmp/gradle-8.2.2-bin.zip https://downloads.gradle.org/distributions/gradle-8.2.2-bin.zip
+        unzip -q /tmp/gradle-8.2.2-bin.zip -d /tmp/
+        echo "GRADLE_HOME=/tmp/gradle-8.2.2" >> $GITHUB_ENV
+        echo "/tmp/gradle-8.2.2/bin" >> $GITHUB_PATH
 
     - name: Build with Gradle
       run: gradle build --no-daemon
