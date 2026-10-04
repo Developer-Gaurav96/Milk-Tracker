@@ -6,6 +6,6 @@ import com.example.miltracker.data.local.MiltrackerDatabase
 class MilktrackerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        MiltrackerDatabase.getInstance(this)
+        Thread { MiltrackerDatabase.getInstance(this) }.start()
     }
 }
